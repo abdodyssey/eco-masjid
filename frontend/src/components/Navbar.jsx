@@ -10,7 +10,6 @@ const navItems = [
   { label: "Kampanye", path: "/kampanye" },
   { label: "Kalkulator", path: "/kalkulator" },
   { label: "Event", path: "/event" },
-  { label: "Luqman", path: "/event" }
 
 ];
 
