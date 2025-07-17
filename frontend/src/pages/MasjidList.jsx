@@ -40,13 +40,19 @@ function MasjidList() {
     tanggalPengajuan: item.tanggalPengajuan,
     // Sementara set sebagai ramah lingkungan karena sudah disetujui
     // Atau bisa ditambahkan field isRamahLingkungan di schema PengajuanMasjid
-    isRamahLingkungan: true
+    isRamahLingkungan: true,
   }));
 
   const filteredMasjid = mappedMasjid.filter((masjid) => {
-    const matchNama = masjid.nama.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchKota = masjid.kota.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchProvinsi = masjid.provinsi.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchNama = masjid.nama
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchKota = masjid.kota
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchProvinsi = masjid.provinsi
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
     const matchSearch = matchNama || matchKota || matchProvinsi;
     const matchFilter = onlyGreen ? masjid.isRamahLingkungan : true;
     return matchSearch && matchFilter;
@@ -77,15 +83,7 @@ function MasjidList() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <label className="flex items-center gap-2 text-sm text-green-700">
-          <input
-            type="checkbox"
-            checked={onlyGreen}
-            onChange={(e) => setOnlyGreen(e.target.checked)}
-            className="accent-green-700"
-          />
-          Tampilkan hanya yang ramah lingkungan
-        </label>
+       
         {(searchTerm || onlyGreen) && (
           <button
             onClick={resetFilter}
