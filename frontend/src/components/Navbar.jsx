@@ -9,10 +9,6 @@ const navItems = [
   { label: "Artikel", path: "/artikel" },
   { label: "Kalkulator", path: "/kalkulator" },
   { label: "Event", path: "/event" },
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/dev
 ];
 
 const Navbar = () => {
