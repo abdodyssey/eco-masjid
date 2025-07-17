@@ -39,4 +39,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Hapus event berdasarkan ID
+router.delete("/:id", async (req, res) => {
+  try {
+    const deleted = await Event.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ message: "Event tidak ditemukan" });
+
+    res.json({ message: "Event berhasil dihapus" });
+  } catch (err) {
+    res.status(500).json({ message: "Gagal menghapus event", error: err });
+  }
+});
+
 module.exports = router;

@@ -25,6 +25,10 @@ const Navbar = () => {
     setIsOpen(false);
   }, [location.pathname]);
 
+  // Sembunyikan navbar jika sedang di halaman admin
+  const isAdminPage = location.pathname.startsWith("/admin");
+  if (isAdminPage) return null;
+
   return (
     <>
       <header className="w-full bg-white shadow-sm sticky top-0 z-50">

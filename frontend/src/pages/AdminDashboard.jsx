@@ -8,13 +8,15 @@ import {
   Plus,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import AddEvent from "./AddEvent"; // Pastikan path sesuai
+import AddEvent from "./AddEvent";
 
 function AdminDashboard() {
   const [pengajuan, setPengajuan] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [showAddEvent, setShowAddEvent] = useState(false);
+  const [activeTab, setActiveTab] = useState("verifikasi");
+  const [eventList, setEventList] = useState([]);
 
   const fetchPengajuan = async () => {
     try {
@@ -29,8 +31,29 @@ function AdminDashboard() {
     }
   };
 
+  const fetchEventList = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/event");
+      setEventList(res.data);
+    } catch (err) {
+      console.error("Gagal mengambil event", err);
+    }
+  };
+
+  const handleDeleteEvent = async (id) => {
+    if (!window.confirm("Yakin ingin menghapus event ini?")) return;
+    try {
+      await axios.delete(`http://localhost:3000/api/event/${id}`);
+      setMessage("Event berhasil dihapus.");
+      fetchEventList();
+    } catch (err) {
+      console.error("Gagal menghapus event", err);
+    }
+  };
+
   useEffect(() => {
     fetchPengajuan();
+    fetchEventList();
   }, []);
 
   const handleAction = async (id, status) => {
@@ -38,9 +61,7 @@ function AdminDashboard() {
       await axios.put(`http://localhost:3000/api/pengajuan/${id}/status`, {
         status,
       });
-      setMessage(
-        `Pengajuan berhasil di${status === "diterima" ? "terima" : "tolak"}.`
-      );
+      setMessage(`Pengajuan berhasil di${status === "diterima" ? "terima" : "tolak"}.`);
       fetchPengajuan();
     } catch (err) {
       console.error(err);
@@ -55,16 +76,33 @@ function AdminDashboard() {
         <h2 className="text-xl font-bold mb-8">Admin EcoMasjid</h2>
         <nav className="space-y-4">
           <button
-            onClick={() => setShowAddEvent(false)}
-            className="flex items-center gap-2 text-white hover:text-emerald-200"
+            onClick={() => {
+              setShowAddEvent(false);
+              setActiveTab("verifikasi");
+            }}
+            className={`flex items-center gap-2 text-white hover:text-emerald-200 ${activeTab === "verifikasi" ? "font-semibold" : ""}`}
           >
             <LayoutDashboard size={18} />
             Verifikasi Masjid
           </button>
 
           <button
-            onClick={() => setShowAddEvent(true)}
-            className="flex items-center gap-2 text-white hover:text-emerald-200"
+            onClick={() => {
+              setShowAddEvent(false);
+              setActiveTab("eventList");
+            }}
+            className={`flex items-center gap-2 text-white hover:text-emerald-200 ${activeTab === "eventList" ? "font-semibold" : ""}`}
+          >
+            <LayoutDashboard size={18} />
+            Daftar Event
+          </button>
+
+          <button
+            onClick={() => {
+              setShowAddEvent(true);
+              setActiveTab("tambahEvent");
+            }}
+            className={`flex items-center gap-2 text-white hover:text-emerald-200 ${activeTab === "tambahEvent" ? "font-semibold" : ""}`}
           >
             <Plus size={18} />
             Tambah Event
@@ -82,7 +120,7 @@ function AdminDashboard() {
 
       {/* Konten utama */}
       <main className="flex-1 px-4 md:px-10 py-8">
-        {!showAddEvent ? (
+        {activeTab === "verifikasi" && !showAddEvent && (
           <>
             <h1 className="text-2xl font-bold text-emerald-800 mb-4">
               Verifikasi Pengajuan Masjid
@@ -156,9 +194,45 @@ function AdminDashboard() {
               </div>
             )}
           </>
-        ) : (
-          <AddEvent onClose={() => setShowAddEvent(false)} />
         )}
+
+        {activeTab === "eventList" && (
+          <>
+            <h1 className="text-2xl font-bold text-emerald-800 mb-4">Daftar Event</h1>
+            {eventList.length === 0 ? (
+              <p className="text-gray-500">Belum ada event.</p>
+            ) : (
+              <div className="space-y-4">
+                {eventList.map((event) => (
+                  <div
+                    key={event._id}
+                    className="rounded-xl p-4 bg-white shadow flex justify-between items-center"
+                  >
+                    <div>
+                      <h2 className="text-lg font-semibold text-emerald-800">
+                        {event.namaEvent}
+                      </h2>
+                      <p className="text-sm text-gray-700">
+                        {event.lokasi.namaMasjid} - {event.lokasi.alamat}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        Tanggal: {new Date(event.tanggal).toLocaleDateString("id-ID")}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => handleDeleteEvent(event._id)}
+                      className="text-sm text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700"
+                    >
+                      Hapus
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
+        {showAddEvent && <AddEvent onClose={() => setShowAddEvent(false)} />}
       </main>
     </div>
   );
