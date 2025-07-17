@@ -19,7 +19,7 @@ const Features = () => {
           <BookOpenText className="w-8 h-8 text-emerald-700 mb-3" />
           <h3 className="font-semibold text-emerald-800 mb-2">Edukasi Islami</h3>
           <p className="text-gray-700 text-sm">
-            Artikel dan video tentang Islam dan pelestarian lingkungan.
+            Artikel tentang Islam dan pelestarian lingkungan.
           </p>
         </div>
 
