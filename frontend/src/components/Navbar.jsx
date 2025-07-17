@@ -10,7 +10,7 @@ const navItems = [
   { label: "Kampanye", path: "/kampanye" },
   { label: "Kalkulator", path: "/kalkulator" },
   { label: "Event", path: "/event" },
-  { label: "LUKMANz", path: "/event" },
+
 ];
 
 const Navbar = () => {
