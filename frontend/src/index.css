@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+#root {
+  font-family: "Nunito", sans-serif;
+  /* background-color: var(--bg-color); */
+}
+/* 
+@theme {
+  --bg-color: #F8FAFC;
+}
+
+@utility bg-white-t{
+  background-color: var(--bg-color); */
+/* } */
