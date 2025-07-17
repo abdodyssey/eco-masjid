@@ -10,19 +10,20 @@ const CallToAction = () => {
         </div>
 
         <h2 className="text-2xl md:text-3xl font-bold mb-2">
-          Gabung dalam Gerakan EcoMasjid
+          Gabung dalam Event EcoMasjid
         </h2>
 
         <p className="mb-6 text-emerald-800/90 text-sm md:text-base">
-          Usulkan ide hijau untuk masjidmu atau ikut kegiatan sosial bersama
-          jamaah lain. Sampaikan aspirasimu dan wujudkan perubahan.
+           Menghadirkan serangkaian kegiatan edukatif dan inspiratif seputar lingkungan,
+           energi, dan gaya hidup berkelanjutan dalam konteks keislaman. 
+           Tempat yang tepat untuk belajar, terlibat, dan menginspirasi perubahan dari lingkungan masjid.
         </p>
 
         <Link
           to={"/kampanye"}
           className="inline-block bg-emerald-800 hover:bg-emerald-900 text-white px-6 py-2 font-medium rounded"
         >
-          Ajukan Kampanye
+          Lihat Event
         </Link>
       </div>
     </section>
