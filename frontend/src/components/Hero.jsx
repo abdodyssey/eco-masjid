@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <section className="relative bg-white text-white py-20 overflow-hidden">
-      <div className="absolute inset-0 leaf-pattern opacity-10"></div>
+      <div className="absolute inset-0 leaf-pattern opacity-10 pointer-events-none"></div>
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         <div className="md:w-1/2 mb-4">
           <h2 className="text-2xl md:text-5xl font-extrabold text-emerald-800 mb-4 leading-tight text-balance">
