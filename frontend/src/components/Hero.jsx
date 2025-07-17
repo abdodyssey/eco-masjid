@@ -2,22 +2,25 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <section class="relative bg-green-700 text-white py-20 overflow-hidden">
+    <section class="relative bg-white text-white py-20 overflow-hidden">
     <div class="absolute inset-0 leaf-pattern opacity-10"></div>
     <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         <div class="md:w-1/2 mb-4">
-            <h2 class="text-3xl font-bold mb-4 leading-tight">
-                EcoMasjid: Gerakan Masjid <span class="text-emerald-300">Ramah Lingkungan</span>
+            <h2 className="text-2xl md:text-5xl font-extrabold text-emerald-800 mb-4 leading-tight text-balance">
+                EcoMasjid: Gerakan Masjid Ramah Lingkungan
             </h2>
-            <p class="text-lg">
+            <p class="ext-base md:text-lg text-gray-700 mb-6 leading-relaxed text-balance">
               Menginspirasi masjid untuk hidup berkelanjutan berdasarkan nilai-nilai Islam:
               kebersihan, amanah, dan tanggung jawab terhadap Bumi
             </p>
-            <div class="flex space-x-4 mt-4">
-                <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium transition shadow-md">
-                    Get Started
-                </button>
-            </div>
+            <div className="flex space-x-4 mt-4">
+          <Link
+            to="/masjid"
+            className="bg-emerald-800 text-white px-6 py-2 rounded hover:bg-emerald-900 transition-all"
+          >
+            Lihat Masjid
+          </Link>
+        </div>
         </div>
         <div class="md:w-1/2">
             <img 
