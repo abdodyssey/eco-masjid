@@ -45,6 +45,10 @@ const KalkulatorForm = ({ hitungKarbon, handleChange, handleReset, data }) => {
         </button>
       </div>
     </form>
+
+
+
+    
   );
 };
 export default KalkulatorForm;
