@@ -1,10 +1,12 @@
 // src/pages/AdminLogin.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 
 function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -40,19 +42,26 @@ function AdminLogin() {
             className="w-full border px-3 py-2 rounded"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="admin"
+            placeholder="Contoh: admin"
           />
         </div>
 
-        <div className="mb-4">
+        <div className="mb-4 relative">
           <label className="block text-sm text-gray-600 mb-1">Password</label>
           <input
-            type="password"
-            className="w-full border px-3 py-2 rounded"
+            type={showPassword ? "text" : "password"}
+            className="w-full border px-3 py-2 rounded pr-10"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="admin123"
+            placeholder="Input password"
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-8 text-gray-600 hover:text-gray-800"
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
         </div>
 
         <button

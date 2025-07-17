@@ -61,7 +61,9 @@ function AdminDashboard() {
       await axios.put(`http://localhost:3000/api/pengajuan/${id}/status`, {
         status,
       });
-      setMessage(`Pengajuan berhasil di${status === "diterima" ? "terima" : "tolak"}.`);
+      setMessage(
+        `Pengajuan berhasil di${status === "diterima" ? "terima" : "tolak"}.`
+      );
       fetchPengajuan();
     } catch (err) {
       console.error(err);
@@ -80,7 +82,9 @@ function AdminDashboard() {
               setShowAddEvent(false);
               setActiveTab("verifikasi");
             }}
-            className={`flex items-center gap-2 text-white hover:text-emerald-200 ${activeTab === "verifikasi" ? "font-semibold" : ""}`}
+            className={`flex items-center gap-2 text-white hover:text-emerald-200 ${
+              activeTab === "verifikasi" ? "font-semibold" : ""
+            }`}
           >
             <LayoutDashboard size={18} />
             Verifikasi Masjid
@@ -91,7 +95,9 @@ function AdminDashboard() {
               setShowAddEvent(false);
               setActiveTab("eventList");
             }}
-            className={`flex items-center gap-2 text-white hover:text-emerald-200 ${activeTab === "eventList" ? "font-semibold" : ""}`}
+            className={`flex items-center gap-2 text-white hover:text-emerald-200 ${
+              activeTab === "eventList" ? "font-semibold" : ""
+            }`}
           >
             <LayoutDashboard size={18} />
             Daftar Event
@@ -102,7 +108,9 @@ function AdminDashboard() {
               setShowAddEvent(true);
               setActiveTab("tambahEvent");
             }}
-            className={`flex items-center gap-2 text-white hover:text-emerald-200 ${activeTab === "tambahEvent" ? "font-semibold" : ""}`}
+            className={`flex items-center gap-2 text-white hover:text-emerald-200 ${
+              activeTab === "tambahEvent" ? "font-semibold" : ""
+            }`}
           >
             <Plus size={18} />
             Tambah Event
@@ -113,7 +121,7 @@ function AdminDashboard() {
             className="flex items-center gap-2 text-white hover:text-emerald-200"
           >
             <LogOut size={18} />
-            Kembali ke Home
+            Logout
           </Link>
         </nav>
       </aside>
@@ -198,7 +206,9 @@ function AdminDashboard() {
 
         {activeTab === "eventList" && (
           <>
-            <h1 className="text-2xl font-bold text-emerald-800 mb-4">Daftar Event</h1>
+            <h1 className="text-2xl font-bold text-emerald-800 mb-4">
+              Daftar Event
+            </h1>
             {eventList.length === 0 ? (
               <p className="text-gray-500">Belum ada event.</p>
             ) : (
@@ -216,7 +226,8 @@ function AdminDashboard() {
                         {event.lokasi.namaMasjid} - {event.lokasi.alamat}
                       </p>
                       <p className="text-sm text-gray-600">
-                        Tanggal: {new Date(event.tanggal).toLocaleDateString("id-ID")}
+                        Tanggal:{" "}
+                        {new Date(event.tanggal).toLocaleDateString("id-ID")}
                       </p>
                     </div>
                     <button

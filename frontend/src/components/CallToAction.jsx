@@ -20,7 +20,7 @@ const CallToAction = () => {
         </p>
 
         <Link
-          to={"/kampanye"}
+          to={"/event"}
           className="inline-block bg-emerald-800 hover:bg-emerald-900 text-white px-6 py-2 font-medium rounded"
         >
           Lihat Event
