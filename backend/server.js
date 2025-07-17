@@ -12,11 +12,14 @@ const kampanyeRoutes = require("./routes/kampanyeRoutes");
 const masjidRoutes = require("./routes/masjidRoutes");
 const artikelRoutes = require("./routes/artikelRoutes");
 const eventRoutes = require("./routes/eventRoutes");
+const pengajuanRoutes = require("./routes/pengajuanRoutes");
+
 
 app.use("/api/kampanye", kampanyeRoutes);
 app.use("/api/masjid", masjidRoutes)
 app.use("/api/artikel", artikelRoutes);
 app.use("/api/event", eventRoutes);
+app.use("/api/pengajuan", pengajuanRoutes);
 
 mongoose
     .connect(process.env.MONGO_URI)

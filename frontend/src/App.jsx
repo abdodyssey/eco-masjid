@@ -8,6 +8,7 @@ import KampanyeForm from "./pages/KampanyeForm";
 import KalkulatorKarbon from "./pages/KalkulatorKarbon";
 import ArtikelDetail from "./components/ArtikelDetail";
 import EventList from "./pages/EventList";
+import PengajuanMasjidForm from "./pages/PengajuanMasjidForm";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/kalkulator" element={<KalkulatorKarbon />} />
           <Route path="/artikel/:id" element={<ArtikelDetail />} />
           <Route path="/event" element={<EventList />} />
+          <Route path="/pengajuan" element={<PengajuanMasjidForm />} />
         </Routes>
         <Footer />
       </div>
