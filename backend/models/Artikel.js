@@ -1,14 +1,28 @@
 const mongoose = require("mongoose");
 
-const artikelSchema = new mongoose.Schema(
-  {
-    judul: String,
-    ringkasan: String,
-    isi: String,
-    kategori: String,
-    tanggal: Date,
+const ArtikelSchema = new mongoose.Schema({
+  judul: {
+    type: String,
+    required: true,
+    trim: true,
   },
-  { timestamps: true }
-);
+  ringkasan: {
+    type: String,
+    trim: true,
+  },
+  isi: {
+    type: String,
+    required: true,
+  },
+  penulis: {
+    type: String,
+    default: "Admin",
+    trim: true,
+  },
+  tanggal: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-module.exports = mongoose.model("Artikel", artikelSchema);
+module.exports = mongoose.model("Artikel", ArtikelSchema);

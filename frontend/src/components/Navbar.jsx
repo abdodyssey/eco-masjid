@@ -7,7 +7,6 @@ const navItems = [
   { label: "Home", path: "/" },
   { label: "Masjid", path: "/masjid" },
   { label: "Artikel", path: "/artikel" },
-  { label: "Kampanye", path: "/kampanye" },
   { label: "Kalkulator", path: "/kalkulator" },
   { label: "Event", path: "/event" },
 ];
@@ -16,23 +15,18 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
 
-  // Disable scroll saat menu terbuka
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
 
-  // Tutup menu saat pindah halaman
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
+
+  const isAdminPage = location.pathname.startsWith("/admin");
+  if (isAdminPage) return null;
 
   return (
     <>
@@ -47,36 +41,36 @@ const Navbar = () => {
             EcoMasjid
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex gap-6">
+          <div className="hidden md:flex items-center gap-6">
             {navItems.map((item, key) => (
               <Link
                 key={key}
                 to={item.path}
-                className="text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors"
+                className="text-sm font-medium text-gray-700 hover:text-emerald-700 transition"
               >
                 {item.label}
               </Link>
             ))}
+            <Link
+              to="/admin/login"
+              className="ml-4 text-sm font-semibold text-emerald-700 border border-emerald-600 px-3 py-1.5 rounded hover:bg-emerald-700 hover:text-white transition"
+            >
+              Login Admin
+            </Link>
           </div>
 
-          {/* Mobile Hamburger */}
-          {!isOpen && (
-            <button onClick={toggleMenu} className="md:hidden text-emerald-800">
-              <Menu size={24} />
-            </button>
-          )}
+          <button onClick={toggleMenu} className="md:hidden text-emerald-800">
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </nav>
       </header>
 
-      {/* Overlay Layer */}
       {isOpen && (
         <div className="fixed inset-0 bg-black/20 z-40" onClick={toggleMenu} />
       )}
 
-      {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white z-50 p-6 shadow-lg transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 h-full w-64 bg-white z-50 p-6 shadow-lg transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -103,6 +97,12 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
+          <Link
+            to="/admin/login"
+            className="text-sm text-emerald-700 font-semibold border border-emerald-600 px-3 py-1.5 rounded hover:bg-emerald-700 hover:text-white transition mt-4"
+          >
+            Login Admin
+          </Link>
         </nav>
       </div>
     </>

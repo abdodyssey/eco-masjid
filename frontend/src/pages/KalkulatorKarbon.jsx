@@ -55,94 +55,101 @@ function KalkulatorKarbon() {
   };
 
   return (
-    <section className="max-w-2xl mx-auto py-10 px-4 min-h-screen">
-      <h1 className="text-3xl font-bold text-emerald-800 mb-4 text-center">
-        Kalkulator Jejak Karbon Masjid
-      </h1>
+    <section id="tools" class="py-16 bg-gradient-to-br from-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-green-900 mb-12">
+          Kalkulator Emisi Karbon Masjid
+        </h2>
 
-      <p className="text-gray-700 text-sm mb-6 text-justify leading-relaxed">
-        <strong>Jejak karbon</strong> adalah jumlah emisi karbon dioksida (CO₂)
-        yang dihasilkan dari aktivitas sehari-hari. Masjid sebagai pusat
-        kegiatan umat juga menyumbang jejak karbon melalui penggunaan{" "}
-        <strong>listrik</strong>, <strong>air</strong>, dan{" "}
-        <strong>plastik sekali pakai</strong>. Gunakan kalkulator ini untuk
-        memperkirakan seberapa besar dampaknya dan mulai lakukan perbaikan demi
-        lingkungan yang lebih baik.
-      </p>
+        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md drop-shadow-lg overflow-hidden mt-6">
+          <div class="md:flex">
+            <div class="md:w-1/2 bg-emerald-800 text-white p-8">
+              <h3 class="text-xl font-bold mb-4">Calculate Your Impact</h3>
+              <p class="mb-6">
+                adalah jumlah emisi karbon dioksida (CO₂) yang dihasilkan dari
+                aktivitas sehari-hari. Masjid sebagai pusat kegiatan umat juga
+                menyumbang jejak karbon melalui penggunaan{" "}
+              </p>
+              <img
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1f689b75-829e-46c4-bdd6-e0aaa1294683.png"
+                alt="Infographic showing mosque sustainability metrics like energy consumption, water usage, and waste production"
+                class="rounded-lg"
+              />
+            </div>
+            <div class="md:w-1/2 p-8">
+              <form onSubmit={hitungKarbon} className="space-y-4 mb-6">
+                <input
+                  type="number"
+                  name="listrik"
+                  placeholder="Penggunaan listrik (kWh/bulan)"
+                  value={data.listrik}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2 rounded bg-white shadow-sm mb-4"
+                  min={0}
+                />
+                <input
+                  type="number"
+                  name="air"
+                  placeholder="Penggunaan air (m³/bulan)"
+                  value={data.air}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2 rounded bg-white shadow-sm mb-4"
+                  min={0}
+                />
+                <input
+                  type="number"
+                  name="plastik"
+                  placeholder="Pemakaian plastik (kg/bulan)"
+                  value={data.plastik}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2 rounded bg-white shadow-sm mb-4"
+                  min={0}
+                />
+                <br />
+                <br />
+                <div className="flex gap-4">
+                  <button
+                    type="submit"
+                    className="bg-emerald-800 text-white px-6 py-2 rounded hover:bg-emerald-800"
+                  >
+                    Hitung Jejak Karbon
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleReset}
+                    className="bg-gray-200 text-gray-700 px-6 py-2 rounded hover:bg-gray-300"
+                  >
+                    Reset
+                  </button>
+                </div>
+              </form>
 
-      {error && (
-        <p className="bg-red-50 border border-red-300 text-red-700 text-sm px-4 py-2 rounded mb-4">
-          {error}
-        </p>
-      )}
-
-      <form onSubmit={hitungKarbon} className="space-y-4 mb-6">
-        <input
-          type="number"
-          name="listrik"
-          placeholder="Penggunaan listrik (kWh/bulan)"
-          value={data.listrik}
-          onChange={handleChange}
-          className="w-full border px-4 py-2 rounded"
-          min={0}
-        />
-        <input
-          type="number"
-          name="air"
-          placeholder="Penggunaan air (m³/bulan)"
-          value={data.air}
-          onChange={handleChange}
-          className="w-full border px-4 py-2 rounded"
-          min={0}
-        />
-        <input
-          type="number"
-          name="plastik"
-          placeholder="Pemakaian plastik (kg/bulan)"
-          value={data.plastik}
-          onChange={handleChange}
-          className="w-full border px-4 py-2 rounded"
-          min={0}
-        />
-
-        <div className="flex gap-4">
-          <button
-            type="submit"
-            className="bg-emerald-700 text-white px-6 py-2 rounded hover:bg-emerald-800"
-          >
-            Hitung Jejak Karbon
-          </button>
-          <button
-            type="button"
-            onClick={handleReset}
-            className="bg-gray-200 text-gray-700 px-6 py-2 rounded hover:bg-gray-300"
-          >
-            Reset
-          </button>
+              {hasil && (
+                <div className="bg-white border p-4 rounded shadow text-center">
+                  <p className="text-lg font-semibold text-gray-700 mb-2">
+                    Total Emisi:
+                    <span className="text-emerald-700">
+                      {" "}
+                      {hasil.total} kg CO₂/bulan
+                    </span>
+                  </p>
+                  <p
+                    className={`text-sm font-medium ${getKategoriWarna(
+                      hasil.kategori
+                    )}`}
+                  >
+                    Kategori: {hasil.kategori}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Estimasi berdasarkan: listrik × 0.85 + air × 0.34 + plastik
+                    × 6.0
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-      </form>
-
-      {hasil && (
-        <div className="bg-white border p-4 rounded shadow text-center">
-          <p className="text-lg font-semibold text-gray-700 mb-2">
-            Total Emisi:
-            <span className="text-emerald-700">
-              {" "}
-              {hasil.total} kg CO₂/bulan
-            </span>
-          </p>
-          <p
-            className={`text-sm font-medium ${getKategoriWarna(
-              hasil.kategori
-            )}`}
-          >
-            Kategori: {hasil.kategori}
-          </p>
-          <p className="text-xs text-gray-500 mt-2">
-            Estimasi berdasarkan: listrik × 0.85 + air × 0.34 + plastik × 6.0
-          </p>
-        </div>
-      )}
+      </div>
     </section>
   );
 }
