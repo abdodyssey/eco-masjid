@@ -53,9 +53,9 @@ router.post(
 );
 
 // ========================
-// GET: Semua pengajuan (admin)
+// GET
 // ========================
-router.get("/", async (req, res) => {
+router.get("/all", async (req, res) => {
     try {
         const data = await Pengajuan.find().sort({ tanggalPengajuan: -1 });
         res.json(data);
@@ -67,12 +67,12 @@ router.get("/", async (req, res) => {
 // ========================
 // GET: Pengajuan yang sudah diterima (untuk publik)
 // ========================
-router.get("/disetujui", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const data = await Pengajuan.find({ status: "diterima" }).sort({ tanggalPengajuan: -1 });
         res.json(data);
     } catch (err) {
-        res.status(500).json({ message: "Gagal mengambil data disetujui" });
+        res.status(500).json({ message: "Gagal mengambil data" });
     }
 });
 

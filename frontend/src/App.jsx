@@ -9,6 +9,9 @@ import KalkulatorKarbon from "./pages/KalkulatorKarbon";
 import ArtikelDetail from "./components/ArtikelDetail";
 import EventList from "./pages/EventList";
 import PengajuanMasjidForm from "./pages/PengajuanMasjidForm";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import AddEvent from "./pages/AddEvent";
 
 function App() {
   return (
@@ -25,6 +28,11 @@ function App() {
           <Route path="/artikel/:id" element={<ArtikelDetail />} />
           <Route path="/event" element={<EventList />} />
           <Route path="/pengajuan" element={<PengajuanMasjidForm />} />
+
+          <Route path="/admin/event/tambah" element={<AddEvent />} />
+
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
         <Footer />
       </div>

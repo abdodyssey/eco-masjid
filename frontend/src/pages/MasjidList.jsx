@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import MasjidCard from "../components/MasjidCard";
-import { LoaderCircle, XCircle, PlusCircle } from "lucide-react";
+import { LoaderCircle, PlusCircle } from "lucide-react";
 
 function MasjidList() {
   const [masjidData, setMasjidData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [onlyGreen, setOnlyGreen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -22,11 +21,6 @@ function MasjidList() {
       .finally(() => setLoading(false));
   }, []);
 
-  const resetFilter = () => {
-    setSearchTerm("");
-    setOnlyGreen(false);
-  };
-
   // Mapping data dari PengajuanMasjid ke format yang dibutuhkan MasjidCard
   const mappedMasjid = masjidData.map((item) => ({
     _id: item._id,
@@ -38,8 +32,6 @@ function MasjidList() {
     pengusul: item.pengusul,
     kontak: item.kontak,
     tanggalPengajuan: item.tanggalPengajuan,
-    // Sementara set sebagai ramah lingkungan karena sudah disetujui
-    // Atau bisa ditambahkan field isRamahLingkungan di schema PengajuanMasjid
     isRamahLingkungan: true,
   }));
 
@@ -54,15 +46,14 @@ function MasjidList() {
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
     const matchSearch = matchNama || matchKota || matchProvinsi;
-    const matchFilter = onlyGreen ? masjid.isRamahLingkungan : true;
-    return matchSearch && matchFilter;
+    return matchSearch;
   });
 
   return (
     <section className="max-w-5xl mx-auto py-8 px-4 min-h-screen">
       {/* Header & Tombol Ajukan */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-        <h1 className="text-3xl font-bold text-green-800 text-center md:text-left">
+        <h1 className="text-3xl font-bold text-emerald-800 text-center md:text-left">
           Daftar Masjid Ramah Lingkungan
         </h1>
         <Link
@@ -78,20 +69,11 @@ function MasjidList() {
       <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
         <input
           type="text"
-          placeholder="Cari nama masjid, kota, atau provinsi..."
-          className="w-full border px-4 py-2 rounded shadow-sm"
+          placeholder="🔍 Cari nama masjid, kota, atau provinsi..."
+          className="w-full px-4 py-2 rounded-xl bg-white shadow placeholder:text-sm text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-       
-        {(searchTerm || onlyGreen) && (
-          <button
-            onClick={resetFilter}
-            className="text-sm text-red-600 flex items-center hover:underline"
-          >
-            <XCircle className="w-4 h-4 mr-1" /> Reset Filter
-          </button>
-        )}
       </div>
 
       {/* Status */}
