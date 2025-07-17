@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import MasjidCard from "../components/MasjidCard";
-import { LoaderCircle, PlusCircle } from "lucide-react";
+import { LoaderCircle, PlusCircle, Search } from "lucide-react";
 
 function MasjidList() {
   const [masjidData, setMasjidData] = useState([]);
@@ -61,19 +61,22 @@ function MasjidList() {
           className="bg-emerald-700 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-emerald-800 w-fit mx-auto md:mx-0"
         >
           <PlusCircle className="w-5 h-5" />
-          Ajukan Masjid
+          Daftarkan masjid
         </Link>
       </div>
 
       {/* Filter & Search */}
       <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
-        <input
-          type="text"
-          placeholder="🔍 Cari nama masjid, kota, atau provinsi..."
-          className="w-full px-4 py-2 rounded-xl bg-white shadow placeholder:text-sm text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <div className="relative w-full">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <input
+            type="text"
+            placeholder="Cari nama masjid, kota, atau provinsi..."
+            className="w-full pl-10 pr-4 py-2 rounded-xl bg-white shadow placeholder:text-sm text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
       </div>
 
       {/* Status */}

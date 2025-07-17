@@ -1,5 +1,4 @@
 import { useState } from "react";
-import KalkulatorForm from "../components/KalkulatorForm";
 
 function KalkulatorKarbon() {
   const [data, setData] = useState({
