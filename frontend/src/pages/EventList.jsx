@@ -23,7 +23,9 @@ function EventList() {
         <div className="space-y-6">
           {events.map((event) => (
             <div key={event._id} className="p-4 shadow rounded-xl bg-white">
-              <h2 className="text-xl font-semibold text-emerald-800">{event.namaEvent}</h2>
+              <h2 className="text-xl font-semibold text-emerald-800">
+                {event.namaEvent}
+              </h2>
               <p className="text-sm text-gray-700 mb-1">
                 <Calendar className="inline mr-1 w-4 h-4" />
                 {new Date(event.tanggal).toLocaleDateString("id-ID", {

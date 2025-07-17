@@ -5,7 +5,7 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-// Setup penyimpanan file
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const folderPath = path.join(__dirname, "../uploads/lampiran");
@@ -52,9 +52,7 @@ router.post(
     }
 );
 
-// ========================
-// GET
-// ========================
+
 router.get("/all", async (req, res) => {
     try {
         const data = await Pengajuan.find().sort({ tanggalPengajuan: -1 });
@@ -64,9 +62,7 @@ router.get("/all", async (req, res) => {
     }
 });
 
-// ========================
-// GET: Pengajuan yang sudah diterima (untuk publik)
-// ========================
+
 router.get("/", async (req, res) => {
     try {
         const data = await Pengajuan.find({ status: "diterima" }).sort({ tanggalPengajuan: -1 });
@@ -76,9 +72,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// ========================
-// PUT: Update status pengajuan
-// ========================
+
 router.put("/:id/status", async (req, res) => {
     try {
         const { status } = req.body;
@@ -93,9 +87,7 @@ router.put("/:id/status", async (req, res) => {
     }
 });
 
-// ========================
-// DELETE: Hapus pengajuan
-// ========================
+
 router.delete("/:id", async (req, res) => {
     try {
         const pengajuan = await Pengajuan.findById(req.params.id);

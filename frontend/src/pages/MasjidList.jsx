@@ -21,11 +21,10 @@ function MasjidList() {
       .finally(() => setLoading(false));
   }, []);
 
-  // Mapping data dari PengajuanMasjid ke format yang dibutuhkan MasjidCard
   const mappedMasjid = masjidData.map((item) => ({
     _id: item._id,
     nama: item.namaMasjid,
-    kota: item.kabupaten, // Menggunakan kabupaten sebagai kota
+    kota: item.kabupaten,
     alamat: item.lokasiDetail || `${item.kabupaten}, ${item.provinsi}`,
     provinsi: item.provinsi,
     deskripsi: item.deskripsi,
@@ -51,7 +50,6 @@ function MasjidList() {
 
   return (
     <section className="max-w-5xl mx-auto py-8 px-4 min-h-screen">
-      {/* Header & Tombol Ajukan */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
         <h1 className="text-3xl font-bold text-emerald-800 text-center md:text-left">
           Daftar Masjid Ramah Lingkungan
@@ -65,7 +63,6 @@ function MasjidList() {
         </Link>
       </div>
 
-      {/* Filter & Search */}
       <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
         <div className="relative w-full">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -79,7 +76,6 @@ function MasjidList() {
         </div>
       </div>
 
-      {/* Status */}
       {loading && (
         <div className="text-center text-gray-600 flex justify-center items-center gap-2">
           <LoaderCircle className="animate-spin" /> Memuat data masjid...
@@ -96,7 +92,6 @@ function MasjidList() {
         </p>
       )}
 
-      {/* Grid */}
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         {filteredMasjid.map((masjid) => (
           <MasjidCard key={masjid._id} masjid={masjid} />

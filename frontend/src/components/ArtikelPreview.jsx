@@ -10,7 +10,7 @@ const ArtikelPreview = () => {
     axios
       .get("http://localhost:3000/api/artikel")
       .then((res) => {
-        setArtikelList(res.data.slice(0, 3)); // Ambil 3 artikel terbaru
+        setArtikelList(res.data.slice(0, 3));
       })
       .catch((err) => {
         console.error("Gagal memuat artikel:", err);

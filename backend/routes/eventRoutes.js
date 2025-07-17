@@ -3,7 +3,7 @@ const router = express.Router();
 const Event = require("../models/Event");
 const Pengajuan = require("../models/PengajuanMasjid");
 
-// Tambah Event
+
 router.post("/", async (req, res) => {
   try {
     const { namaEvent, deskripsi, tanggal, masjidId } = req.body;
@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Ambil semua event
+
 router.get("/", async (req, res) => {
   try {
     const data = await Event.find().sort({ tanggal: 1 });
@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Hapus event berdasarkan ID
+
 router.delete("/:id", async (req, res) => {
   try {
     const deleted = await Event.findByIdAndDelete(req.params.id);

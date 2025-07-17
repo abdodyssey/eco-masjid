@@ -21,7 +21,6 @@ function PengajuanMasjidForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Get provinsi
   useEffect(() => {
     axios
       .get("https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json")
@@ -29,7 +28,6 @@ function PengajuanMasjidForm() {
       .catch(() => setError("Gagal memuat daftar provinsi"));
   }, []);
 
-  // Get kabupaten berdasarkan provinsi
   useEffect(() => {
     if (form.provinsi) {
       const selectedProv = provinsiList.find((p) => p.name === form.provinsi);

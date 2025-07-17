@@ -33,13 +33,15 @@ function AddEvent() {
       setMessage("Event berhasil ditambahkan.");
       setForm({ namaEvent: "", deskripsi: "", tanggal: "", masjidId: "" });
     } catch (err) {
-      setMessage("Gagal menambahkan event.");
+      setMessage("Gagal menambahkan event.", err);
     }
   };
 
   return (
     <section className="max-w-2xl mx-auto py-10 px-4">
-      <h1 className="text-2xl font-bold text-emerald-800 mb-4">Tambah Event Baru</h1>
+      <h1 className="text-2xl font-bold text-emerald-800 mb-4">
+        Tambah Event Baru
+      </h1>
 
       {message && <p className="mb-4 text-sm text-gray-700">{message}</p>}
 

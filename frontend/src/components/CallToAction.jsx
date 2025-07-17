@@ -14,9 +14,10 @@ const CallToAction = () => {
         </h2>
 
         <p className="mb-6 text-emerald-800/90 text-sm md:text-base">
-           Menghadirkan serangkaian kegiatan edukatif dan inspiratif seputar lingkungan,
-           energi, dan gaya hidup berkelanjutan dalam konteks keislaman. 
-           Tempat yang tepat untuk belajar, terlibat, dan menginspirasi perubahan dari lingkungan masjid.
+          Menghadirkan serangkaian kegiatan edukatif dan inspiratif seputar
+          lingkungan, energi, dan gaya hidup berkelanjutan dalam konteks
+          keislaman. Tempat yang tepat untuk belajar, terlibat, dan
+          menginspirasi perubahan dari lingkungan masjid.
         </p>
 
         <Link

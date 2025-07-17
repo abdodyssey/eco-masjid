@@ -1,4 +1,3 @@
-// models/PengajuanMasjid.js
 const mongoose = require("mongoose");
 
 const PengajuanSchema = new mongoose.Schema({
@@ -9,8 +8,8 @@ const PengajuanSchema = new mongoose.Schema({
     deskripsi: String,
     pengusul: { type: String, required: true },
     kontak: String,
-    lampiranSuratKeterangan: String, // path file
-    lampiranBuktiPengurus: String,   // path file
+    lampiranSuratKeterangan: String,
+    lampiranBuktiPengurus: String,
     status: {
         type: String,
         enum: ["menunggu", "diterima", "ditolak"],

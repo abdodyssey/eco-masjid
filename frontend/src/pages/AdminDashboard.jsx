@@ -73,7 +73,6 @@ function AdminDashboard() {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar */}
       <aside className="w-64 bg-emerald-800 text-white p-6 hidden md:block">
         <h2 className="text-xl font-bold mb-8">Admin EcoMasjid</h2>
         <nav className="space-y-4">
@@ -126,7 +125,6 @@ function AdminDashboard() {
         </nav>
       </aside>
 
-      {/* Konten utama */}
       <main className="flex-1 px-4 md:px-10 py-8">
         {activeTab === "verifikasi" && !showAddEvent && (
           <>

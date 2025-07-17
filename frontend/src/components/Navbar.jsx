@@ -25,7 +25,6 @@ const Navbar = () => {
     setIsOpen(false);
   }, [location.pathname]);
 
-  // Sembunyikan navbar jika sedang di halaman admin
   const isAdminPage = location.pathname.startsWith("/admin");
   if (isAdminPage) return null;
 
@@ -42,7 +41,6 @@ const Navbar = () => {
             EcoMasjid
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             {navItems.map((item, key) => (
               <Link
@@ -61,25 +59,16 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile Hamburger */}
-          <button
-            onClick={toggleMenu}
-            className="md:hidden text-emerald-800"
-          >
+          <button onClick={toggleMenu} className="md:hidden text-emerald-800">
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </nav>
       </header>
 
-      {/* Overlay */}
       {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/20 z-40"
-          onClick={toggleMenu}
-        />
+        <div className="fixed inset-0 bg-black/20 z-40" onClick={toggleMenu} />
       )}
 
-      {/* Mobile Sidebar */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-white z-50 p-6 shadow-lg transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"

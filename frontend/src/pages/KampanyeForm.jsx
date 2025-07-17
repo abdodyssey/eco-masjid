@@ -27,7 +27,9 @@ function KampanyeForm() {
 
   const fetchMasjid = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/pengajuan/disetujui");
+      const res = await axios.get(
+        "http://localhost:3000/api/pengajuan/disetujui"
+      );
       console.log("Data masjid:", res.data);
       setMasjidList(res.data);
     } catch (err) {
@@ -44,19 +46,18 @@ function KampanyeForm() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    
-    // Auto-fill lokasi ketika masjid dipilih
+
     if (name === "namaMasjid" && value) {
-      const selectedMasjid = masjidList.find(m => m.namaMasjid === value);
+      const selectedMasjid = masjidList.find((m) => m.namaMasjid === value);
       if (selectedMasjid) {
-        setFormData(prev => ({
+        setFormData((prev) => ({
           ...prev,
           [name]: value,
-          lokasi: `${selectedMasjid.kabupaten}, ${selectedMasjid.provinsi}`
+          lokasi: `${selectedMasjid.kabupaten}, ${selectedMasjid.provinsi}`,
         }));
       }
     }
-    
+
     setError("");
   };
 
@@ -67,7 +68,12 @@ function KampanyeForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.namaPengusul || !formData.namaMasjid || !formData.lokasi || !formData.ide) {
+    if (
+      !formData.namaPengusul ||
+      !formData.namaMasjid ||
+      !formData.lokasi ||
+      !formData.ide
+    ) {
       setError("Mohon lengkapi semua isian sebelum mengirim.");
       return;
     }
@@ -87,7 +93,7 @@ function KampanyeForm() {
 
   const filteredList = kampanyeList.filter((k) => {
     const masjidName = k.masjid?.namaMasjid || k.namaMasjid || "";
-    const lokasi = k.masjid 
+    const lokasi = k.masjid
       ? `${k.masjid.kabupaten}, ${k.masjid.provinsi}`
       : k.lokasi || "";
     const searchText = `${masjidName} ${lokasi}`.toLowerCase();
