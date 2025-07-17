@@ -9,27 +9,18 @@ const navItems = [
   { label: "Artikel", path: "/artikel" },
   { label: "Kalkulator", path: "/kalkulator" },
   { label: "Event", path: "/event" },
-  { label: "Login", path: "/login" },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
 
-  // Disable scroll saat menu terbuka
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
 
-  // Tutup menu saat pindah halaman
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
@@ -48,7 +39,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex gap-6">
+          <div className="hidden md:flex items-center gap-6">
             {navItems.map((item, key) => (
               <Link
                 key={key}
@@ -58,6 +49,14 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
+
+            {/* Tombol Login */}
+            <Link
+              to="/admin/login"
+              className="ml-4 text-sm font-semibold text-emerald-700 border border-emerald-600 px-3 py-1.5 rounded hover:bg-emerald-700 hover:text-white transition"
+            >
+              Login Admin
+            </Link>
           </div>
 
           {/* Mobile Hamburger */}
@@ -103,6 +102,13 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
+
+          <Link
+            to="/admin/login"
+            className="text-sm text-emerald-700 font-semibold border border-emerald-600 px-3 py-1.5 rounded hover:bg-emerald-700 hover:text-white transition mt-4"
+          >
+            Login Admin
+          </Link>
         </nav>
       </div>
     </>
