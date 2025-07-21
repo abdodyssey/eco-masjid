@@ -13,14 +13,12 @@ const path = require("path");
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 
-const masjidRoutes = require("./routes/masjidRoutes");
 const artikelRoutes = require("./routes/artikelRoutes");
 const eventRoutes = require("./routes/eventRoutes");
 const pengajuanRoutes = require("./routes/pengajuanRoutes");
 
 
 
-app.use("/api/masjid", masjidRoutes)
 app.use("/api/artikel", artikelRoutes);
 app.use("/api/event", eventRoutes);
 app.use("/api/pengajuan", pengajuanRoutes);
