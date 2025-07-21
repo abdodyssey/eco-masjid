@@ -8,7 +8,9 @@ import {
   Phone,
 } from "lucide-react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
+// Komponen kartu masjid
 function MasjidCard({ masjid, onClick }) {
   return (
     <div
@@ -16,12 +18,10 @@ function MasjidCard({ masjid, onClick }) {
       onClick={() => onClick(masjid)}
     >
       <div className="space-y-2">
-        {/* Judul */}
         <h3 className="text-lg font-semibold text-emerald-800 leading-snug">
           {masjid.nama}
         </h3>
 
-        {/* Lokasi */}
         <div className="flex items-center text-gray-600 text-sm">
           <MapPin className="w-4 h-4 mr-1.5" />
           <span className="capitalize">
@@ -29,13 +29,11 @@ function MasjidCard({ masjid, onClick }) {
           </span>
         </div>
 
-        {/* Deskripsi */}
         <p className="text-sm text-gray-700 line-clamp-3 leading-relaxed">
           {masjid.deskripsi || "Belum ada deskripsi"}
         </p>
       </div>
 
-      {/* Footer */}
       <div className="flex items-center justify-between mt-4">
         <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">
           Ramah Lingkungan
@@ -48,12 +46,13 @@ function MasjidCard({ masjid, onClick }) {
   );
 }
 
+// Komponen popup detail
 function MasjidDetailPopup({ masjid, onClose }) {
   if (!masjid) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/20  flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-xl ">
+    <div className="fixed inset-0 bg-black/20 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-xl">
         <div className="sticky top-0 bg-white p-4 border-b border-gray-100 flex items-center justify-between">
           <h2 className="text-xl font-bold text-emerald-800">{masjid.nama}</h2>
           <button
@@ -78,9 +77,7 @@ function MasjidDetailPopup({ masjid, onClose }) {
 
           {masjid.deskripsi && (
             <div>
-              <p className="text-sm font-medium text-gray-800 mb-1">
-                Deskripsi
-              </p>
+              <p className="text-sm font-medium text-gray-800 mb-1">Deskripsi</p>
               <p className="text-sm text-gray-600 leading-relaxed">
                 {masjid.deskripsi}
               </p>
@@ -109,6 +106,7 @@ function MasjidDetailPopup({ masjid, onClose }) {
   );
 }
 
+// Komponen utama
 function MasjidList() {
   const [masjidData, setMasjidData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -120,10 +118,7 @@ function MasjidList() {
     axios
       .get("http://localhost:3000/api/pengajuan/")
       .then((res) => setMasjidData(res.data))
-      .catch((err) => {
-        console.error(err);
-        setError("Gagal memuat data masjid. Silakan coba lagi.");
-      })
+      .catch(() => setError("Gagal memuat data masjid. Silakan coba lagi."))
       .finally(() => setLoading(false));
   }, []);
 
@@ -150,8 +145,7 @@ function MasjidList() {
     const matchProvinsi = masjid.provinsi
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-    const matchSearch = matchNama || matchKota || matchProvinsi;
-    return matchSearch;
+    return matchNama || matchKota || matchProvinsi;
   });
 
   const handleCardClick = (masjid) => {
@@ -165,19 +159,21 @@ function MasjidList() {
   return (
     <>
       <section className="max-w-5xl mx-auto py-8 px-4 min-h-screen">
+        {/* Header + Tombol */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
           <h1 className="text-3xl font-bold text-emerald-800 text-center md:text-left">
             Daftar Masjid Ramah Lingkungan
           </h1>
-          <button
-            onClick={() => console.log("Navigate to /pengajuan")}
+          <Link
+            to="/pengajuan"
             className="bg-emerald-700 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-emerald-800 w-fit mx-auto md:mx-0"
           >
             <PlusCircle className="w-5 h-5" />
             Daftarkan masjid
-          </button>
+          </Link>
         </div>
 
+        {/* Input Pencarian */}
         <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
           <div className="relative w-full">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -191,6 +187,7 @@ function MasjidList() {
           </div>
         </div>
 
+        {/* Loading & Error */}
         {loading && (
           <div className="text-center text-gray-600 flex justify-center items-center gap-2">
             <LoaderCircle className="animate-spin" /> Memuat data masjid...
@@ -207,6 +204,7 @@ function MasjidList() {
           </p>
         )}
 
+        {/* Daftar Masjid */}
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
           {filteredMasjid.map((masjid) => (
             <MasjidCard
@@ -218,6 +216,7 @@ function MasjidList() {
         </div>
       </section>
 
+      {/* Pop-up detail */}
       <MasjidDetailPopup masjid={selectedMasjid} onClose={handleClosePopup} />
     </>
   );
