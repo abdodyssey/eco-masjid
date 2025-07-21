@@ -10,7 +10,6 @@ import {
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-// Komponen kartu masjid
 function MasjidCard({ masjid, onClick }) {
   return (
     <div
@@ -46,7 +45,6 @@ function MasjidCard({ masjid, onClick }) {
   );
 }
 
-// Komponen popup detail
 function MasjidDetailPopup({ masjid, onClose }) {
   if (!masjid) return null;
 
@@ -77,7 +75,9 @@ function MasjidDetailPopup({ masjid, onClose }) {
 
           {masjid.deskripsi && (
             <div>
-              <p className="text-sm font-medium text-gray-800 mb-1">Deskripsi</p>
+              <p className="text-sm font-medium text-gray-800 mb-1">
+                Deskripsi
+              </p>
               <p className="text-sm text-gray-600 leading-relaxed">
                 {masjid.deskripsi}
               </p>
@@ -106,7 +106,6 @@ function MasjidDetailPopup({ masjid, onClose }) {
   );
 }
 
-// Komponen utama
 function MasjidList() {
   const [masjidData, setMasjidData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -159,7 +158,6 @@ function MasjidList() {
   return (
     <>
       <section className="max-w-5xl mx-auto py-8 px-4 min-h-screen">
-        {/* Header + Tombol */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
           <h1 className="text-3xl font-bold text-emerald-800 text-center md:text-left">
             Daftar Masjid Ramah Lingkungan
@@ -173,7 +171,6 @@ function MasjidList() {
           </Link>
         </div>
 
-        {/* Input Pencarian */}
         <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
           <div className="relative w-full">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -187,7 +184,6 @@ function MasjidList() {
           </div>
         </div>
 
-        {/* Loading & Error */}
         {loading && (
           <div className="text-center text-gray-600 flex justify-center items-center gap-2">
             <LoaderCircle className="animate-spin" /> Memuat data masjid...
@@ -204,7 +200,6 @@ function MasjidList() {
           </p>
         )}
 
-        {/* Daftar Masjid */}
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
           {filteredMasjid.map((masjid) => (
             <MasjidCard
@@ -216,7 +211,6 @@ function MasjidList() {
         </div>
       </section>
 
-      {/* Pop-up detail */}
       <MasjidDetailPopup masjid={selectedMasjid} onClose={handleClosePopup} />
     </>
   );
